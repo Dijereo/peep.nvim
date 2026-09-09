@@ -40,6 +40,12 @@ Given a markdown buffer containing a fenced mermaid code block with invalid diag
 When the buffer is previewed
 Then an error/placeholder renders in place of the diagram, rather than failing silently or crashing the preview
 
+### Scenario: Render strikethrough and task lists
+
+Given a markdown buffer containing strikethrough text (`~~text~~`) and task list items (`- [ ]` / `- [x]`)
+When the buffer is previewed
+Then strikethrough text renders with a line through it, and task list items render with checkbox indicators reflecting their checked state
+
 ### Acceptance Criteria
 
 - [ ] Headers render as formatted headings matching their level
@@ -52,6 +58,8 @@ Then an error/placeholder renders in place of the diagram, rather than failing s
 - [ ] A `---` line that is not a leading front-matter delimiter renders as a horizontal rule
 - [ ] Fenced code blocks tagged mermaid render as diagrams
 - [ ] A mermaid block with invalid syntax renders an error/placeholder in place of the diagram
+- [ ] Strikethrough text renders with a line through it
+- [ ] Task list items render with checkbox indicators matching their checked/unchecked state
 - [ ] Target markdown flavor is GitHub-Flavored Markdown (GFM) plus mermaid diagram support
 
 ## Requirement: Interactive links in markdown preview
@@ -98,3 +106,30 @@ Then an error/notice is shown within the preview window instead of opening a buf
 - [ ] File paths in links are resolved relative to the markdown file's own location
 - [ ] Clicking a section link with no matching heading shows an error/notice within the preview window instead of silently doing nothing
 - [ ] Clicking a file link to a nonexistent file shows an error/notice within the preview window instead of silently doing nothing
+
+## Requirement: Interactive task list checkboxes in markdown preview
+
+As a Neovim user, I want to click a task list checkbox in the rendered
+markdown preview, so that I can toggle it without switching back to the
+editor.
+
+### Scenario: Check an unchecked task
+Given the preview shows an unchecked task list item
+When the user clicks its checkbox
+Then the checkbox displays as checked and the corresponding line in the source buffer updates to a checked task item
+
+### Scenario: Uncheck a checked task
+Given the preview shows a checked task list item
+When the user clicks its checkbox
+Then the checkbox displays as unchecked and the corresponding line in the source buffer updates to an unchecked task item
+
+### Scenario: Click a checkbox on a read-only buffer
+Given the source buffer is read-only or otherwise non-modifiable
+When the user clicks a task checkbox in the preview
+Then an error/notice is shown within the preview window and the checkbox state does not change
+
+### Acceptance Criteria
+- [ ] Clicking an unchecked task's checkbox in the preview checks it and updates the corresponding line in the source buffer
+- [ ] Clicking a checked task's checkbox in the preview unchecks it and updates the corresponding line in the source buffer
+- [ ] The buffer update is in-memory (reflected like any other unsaved change), not an automatic save to disk
+- [ ] Clicking a checkbox on a read-only/non-modifiable buffer shows an error/notice within the preview window and leaves the checkbox unchanged
