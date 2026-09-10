@@ -8,8 +8,8 @@ PDF is a standalone format with no source buffer — sync-scroll does
 not apply (see `docs/specs/core/sync-scroll.md`). Content resolution
 (buffer in-memory content vs. reading from disk) follows the generic
 rule in `docs/specs/core/preview-window.md`. Viewing controls (page
-navigation, zoom, text search) are deferred to
-[#3](https://github.com/Dijereo/peep.nvim/issues/3).
+navigation, zoom, text search) are specified generically in
+`docs/specs/core/window-keybinds.md`.
 
 ### Scenario: Preview a PDF file
 Given a supported PDF target file (current buffer or file explorer selection)
@@ -24,4 +24,4 @@ Then an error/notice is shown within the preview window rather than crashing the
 ### Acceptance Criteria
 - [ ] Pressing the preview keybind on a supported PDF target file opens/updates a tab rendering the PDF's pages
 - [ ] A malformed/corrupt PDF file shows an in-window error/notice rather than crashing the preview
-- [ ] Page navigation, zoom, and text search controls are out of scope for this requirement (see [#3](https://github.com/Dijereo/peep.nvim/issues/3))
+- [ ] Page navigation, zoom, and text search controls are specified generically in `docs/specs/core/window-keybinds.md`

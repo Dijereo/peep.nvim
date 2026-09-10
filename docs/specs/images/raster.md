@@ -9,8 +9,8 @@ buffer — target file content is always read from disk, per the
 generic no-buffer rule in `docs/specs/core/preview-window.md` (no
 format-specific override). Sync-scroll does not apply (see
 `docs/specs/core/sync-scroll.md`) since there's no source buffer.
-Zoom is deferred, alongside PDF's viewing controls, to
-[#3](https://github.com/Dijereo/peep.nvim/issues/3).
+Zoom is specified generically, alongside PDF's viewing controls, in
+`docs/specs/core/window-keybinds.md`.
 
 ### Scenario: Preview a raster image
 Given a supported PNG or JPG target file (current buffer or file explorer selection)
@@ -31,4 +31,4 @@ Then an error/notice is shown within the preview window rather than crashing the
 - [ ] Pressing the preview keybind on a supported PNG/JPG target file opens/updates a tab rendering the image
 - [ ] Images wider than the preview tab are scaled down to fit the tab's width, preserving aspect ratio
 - [ ] A malformed/corrupt image file shows an in-window error/notice rather than crashing the preview
-- [ ] Zoom controls are out of scope for this requirement (see [#3](https://github.com/Dijereo/peep.nvim/issues/3))
+- [ ] Zoom controls are specified generically in `docs/specs/core/window-keybinds.md`

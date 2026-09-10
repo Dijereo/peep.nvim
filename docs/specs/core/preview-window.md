@@ -60,10 +60,12 @@ Then Neovim shows an error message stating the file format is unsupported
 - [ ] Renderer/window launch failure shows a descriptive Neovim error message
 - [ ] Unsupported file type shows a Neovim error message naming the issue
 - [ ] Any error, warning, alert, or info message displayed within the preview window is non-blocking and dismisses itself automatically, never requiring a click to dismiss
-- [ ] The preview window can exist with zero tabs open (e.g. after all tabs have been individually closed); tab-closing behavior itself is specified separately
+- [ ] The preview window is never left with zero tabs: when the last regular tab is closed, the keybind help tab is automatically shown instead; the window itself only closes when the help tab is closed with nothing else open, or via the close-window keybind. Tab-closing and other in-window keybinds are specified in `docs/specs/core/window-keybinds.md`
 
 ### Non-Functional Requirements
 
 - [ ] When the Neovim instance that spawned the preview window exits, the system shall terminate the external preview window/process.
+- [ ] When the preview window closes for any reason (in-window close, or the spawning Neovim instance exiting), the system shall terminate its entire backing process, including any local server or other background process it runs, not just the visible window.
 - [ ] When the user presses the preview keybind, the system shall open or update the preview window within 500ms.
 - [ ] While no display is available (e.g. a headless/SSH session), when the user presses the preview keybind, the system shall show a descriptive Neovim error instead of hanging or crashing.
+- [ ] The preview keybind shall be configurable/remappable, not hardcoded.

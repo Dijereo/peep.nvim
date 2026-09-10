@@ -11,8 +11,8 @@ without a format-specific override. Sync-scroll does not apply (see
 `docs/specs/core/sync-scroll.md`) since there's no source buffer to
 sync from. Once converted, the resulting PDF renders per
 `docs/specs/office-docs/pdf.md` (page navigation/zoom/search
-controls out of scope, deferred to
-[#3](https://github.com/Dijereo/peep.nvim/issues/3)).
+controls specified generically in
+`docs/specs/core/window-keybinds.md`).
 
 ### Scenario: Convert and preview a supported Office document
 Given a supported docx, xlsx, or pptx target file (current buffer or file explorer selection)
